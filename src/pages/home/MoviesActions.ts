@@ -1,5 +1,6 @@
-import { createActionTypes } from '../utils/createActionTypes';
-import { Movie } from '../types/movie';
+import { createActionTypes } from '../../utils/createActionTypes';
+import { Movie, Movies } from '../../types/movie';
+import { AxiosError } from 'axios';
 
 const MOVIES_PREFIX = 'pages/movies';
 
@@ -16,14 +17,14 @@ export function getMovies() {
     payload: null,
   };
 }
-export function getMoviesSuccess(payload:unknown) {
+export function getMoviesSuccess(payload:Movies) {
   return {
     type: movieActionTypes.GET_MOVIES_SUCCESS,
     payload,
   };
 }
 
-export function getMoviesError(payload:unknown){
+export function getMoviesError(payload:AxiosError<unknown>){
   return {
     type: movieActionTypes.SET_ERROR,
     payload,

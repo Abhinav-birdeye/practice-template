@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime'
 import './App.css'
-import { MoviesContainer } from './components/MoviesContainer'
+import { MoviesContainer } from './pages/home/MoviesContainer'
 
 function App() {
 

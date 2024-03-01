@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getMovies, } from './MoviesActions';
-import { MoviesView } from './MoviesView';
+import { MoviesView } from "./MoviesView";
 import { useEffect } from 'react';
 import { MoviesState } from './MoviesReducer';
 
@@ -10,7 +10,7 @@ export const MoviesContainer = () => {
 
   useEffect(() => {
     dispatch(getMovies());
-  }, [])
+  }, [dispatch])
 
   return (
     <MoviesView

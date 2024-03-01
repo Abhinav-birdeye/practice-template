@@ -1,6 +1,6 @@
 import {call, put, takeLatest} from "redux-saga/effects";
-import { api } from "../api/api";
-import { Movies } from "../types/movie";
+import { api } from "../../api/api";
+import { Movies } from "../../types/movie";
 import {  getMoviesError, getMoviesSuccess, movieActionTypes } from "./MoviesActions";
 
 export async function fetchTrendingMovies(){

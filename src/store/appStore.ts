@@ -1,5 +1,5 @@
 import { legacy_createStore, applyMiddleware } from "redux";
-import { moviesReducer } from "../components/MoviesReducer";
+import { moviesReducer } from "../pages/home/MoviesReducer";
 import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./rootSaga";
 
