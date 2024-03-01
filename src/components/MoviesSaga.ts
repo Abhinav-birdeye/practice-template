@@ -1,14 +1,23 @@
-import {call, put} from "redux-saga/effects";
+import {call, put, takeLatest} from "redux-saga/effects";
+import { api } from "../api/api";
+import { Movies } from "../types/movie";
+import {  getMoviesError, getMoviesSuccess, movieActionTypes } from "./MoviesActions";
 
-export async function fetchPosts(){
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts/1/comments')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-    return response;
+export async function fetchTrendingMovies(){
+   const response = await api.get("/trending/movie/week");
+   return response.data as Movies;
 }
 
-function* getPosts(){
-    const response = yield call(fetchPosts);
-    yield put(()=>{console.log(response)});
+export function* getTrendingMovies(){
+    try {
+        const response:Movies = yield call(fetchTrendingMovies);
+        yield put(getMoviesSuccess(response));
+    } catch (error) {
+        yield(put(getMoviesError(error)));
+    }
+}
+
+export function* movieSagas(){
+    yield takeLatest(movieActionTypes.GET_MOVIES, getTrendingMovies)
 }
 

@@ -1,4 +1,11 @@
-import { legacy_createStore } from "redux";
+import { legacy_createStore, applyMiddleware } from "redux";
 import { moviesReducer } from "../components/MoviesReducer";
+import createSagaMiddleware from "redux-saga";
+import { rootSaga } from "./rootSaga";
 
-export const appStore = legacy_createStore(moviesReducer);
+
+const sagaMiddleWare = createSagaMiddleware()
+
+export const appStore = legacy_createStore(moviesReducer, applyMiddleware(sagaMiddleWare));
+
+sagaMiddleWare.run(rootSaga)

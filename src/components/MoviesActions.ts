@@ -3,18 +3,31 @@ import { Movie } from '../types/movie';
 
 const MOVIES_PREFIX = 'pages/movies';
 
-const MOVIES_ACTIONS = ['GET_MOVIES', 'SET_MOVIES', "CLEAR_MOVIES"] as const;
+const MOVIES_ACTIONS = ['GET_MOVIES', "GET_MOVIES_SUCCESS", 'SET_MOVIES', "CLEAR_MOVIES", "SET_ERROR", "SET_LOADING"] as const;
 
-const movieActionTypes = createActionTypes(MOVIES_PREFIX, MOVIES_ACTIONS);
+export const movieActionTypes = createActionTypes(MOVIES_PREFIX, MOVIES_ACTIONS);
 
 export type ActionKeys = keyof typeof movieActionTypes;
 export type ActionValues = typeof movieActionTypes[ActionKeys];
 
-export function getMovies(payload: Movie[]) {
+export function getMovies() {
   return {
     type: movieActionTypes.GET_MOVIES,
+    payload: null,
+  };
+}
+export function getMoviesSuccess(payload:unknown) {
+  return {
+    type: movieActionTypes.GET_MOVIES_SUCCESS,
     payload,
   };
+}
+
+export function getMoviesError(payload:unknown){
+  return {
+    type: movieActionTypes.SET_ERROR,
+    payload,
+  }
 }
 
 export function setMovies(payload: Movie[]) {
@@ -31,6 +44,9 @@ export function clearMovies(payload:null){
     }
 }
 
-export const movieActions = [getMovies, setMovies, clearMovies] as const;
+
+
+
+export const movieActions = [getMovies, setMovies, clearMovies, getMoviesSuccess] as const;
 
 export type MovieAction = ReturnType<typeof movieActions[number]>;

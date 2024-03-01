@@ -1,17 +1,21 @@
-import { Movie } from '../types/movie';
-import {  clearMovies, setMovies } from './MoviesActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getMovies, } from './MoviesActions';
 import { MoviesView } from './MoviesView';
-import {useSelector, useDispatch} from "react-redux"
-
+import { useEffect } from 'react';
+import { MoviesState } from './MoviesReducer';
 
 export const MoviesContainer = () => {
-    const dispatch = useDispatch();
-    const storeState = useSelector((state)=>state);
-    return (
+  const dispatch = useDispatch();
+  const state = useSelector((state: MoviesState) => state?.movies);
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [])
+
+  return (
     <MoviesView
-      movies={storeState as Movie[]}
-      handleSetMovies={(payload)=>dispatch(setMovies(payload))}
-      handleClearMovies={()=>dispatch(clearMovies(null))}
+      movies={state?.data}
+      isLoading={state?.isLoading}
     />
   );
 };

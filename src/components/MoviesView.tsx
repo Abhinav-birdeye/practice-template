@@ -1,35 +1,32 @@
-import { Movie } from '../types/movie';
+import { Movies } from "../types/movie";
+
 
 interface MoviesViewProps {
-  movies:Movie[];
-  handleSetMovies: (payload: Movie[]) => void;
-  handleClearMovies: ()=>void;
+  movies: Movies | null;
+  isLoading?: boolean;
 }
 
-const DUMMY_MOVIES_LIST = [{
-  name:"DUNE",
-  actors:[],
-  director:"Denis Villeneuve",
-  genre:"SCI_FI",
-  year:2021
-}] satisfies Movie[];
 
 export const MoviesView = (props: MoviesViewProps) => {
-  const { movies, handleSetMovies, handleClearMovies } = props;
-  const onSetMovie = () =>{
-    handleSetMovies(DUMMY_MOVIES_LIST)
+  const { movies, isLoading } = props;
+  if (isLoading) {
+    return <div>Loading...</div>
   }
   return (
     <div>
       <h2>Movie List</h2>
+      <p>Total Results: {movies?.total_results}</p>
+      <p>Total Pages: {movies?.total_pages}</p>
       <ul>
-        {movies?.map((movie)=>(
-          <li key={movie?.name}>{movie?.name}</li>
+        {movies?.results?.map((movie) => (
+          <li key={movie?.original_title}>
+            <span>
+              {movie?.original_title}
+            </span>
+            <span>{movie?.poster_path}</span>
+          </li>
         ))}
       </ul>
-      <h3>Actions</h3>
-      <button onClick={onSetMovie}>SET MOVIES</button>
-      <button onClick={handleClearMovies}>CLEAR MOVIES</button>
     </div>
   );
 };

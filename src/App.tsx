@@ -7,7 +7,7 @@ function App() {
     <>
       <h1>Vite + Redux + TS</h1>
       <div className="card">
-      <MoviesContainer/>
+        <MoviesContainer />
       </div>
     </>
   )
