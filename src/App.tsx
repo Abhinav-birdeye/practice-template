@@ -1,15 +1,17 @@
+import { Fragment } from 'react/jsx-runtime'
 import './App.css'
 import { MoviesContainer } from './components/MoviesContainer'
 
 function App() {
 
   return (
-    <>
-      <h1>Vite + Redux + TS</h1>
+    <Fragment>
+      <h1>Movie List</h1>
+      <p>Created using React, Typescript, Redux, and Redux Saga</p>
       <div className="card">
         <MoviesContainer />
       </div>
-    </>
+    </Fragment>
   )
 }
 
